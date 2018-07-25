@@ -1,0 +1,22 @@
+#title {
+    text-align: center;
+}
+#instructions {
+    text-align: center;
+}
+#image-div {
+    text-align: right;
+}
+
+#answer {
+    text-align: right;
+}
+.row {
+    margin: 50px;
+    padding: 20px;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}

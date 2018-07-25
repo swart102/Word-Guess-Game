@@ -12,22 +12,27 @@
 <body>
     <div class="container">
         <div class="row">
-            <h1>Word Guess Game</h1>
+            <div id="title" class="col-md-12">
+                <h1>Word Guess Game</h1>
+            </div>
+            <div id="instructions" class="col-md-12">
+                <h3>Press any key to get started</h3>
+            </div>
         </div>
         <div class="row">
-            <h3>Press any key to get started</h3>
-        </div>
-        <div id="wins" class="row">
-            <h4>Wins</h4>
-        </div>
-        <div id="remainingGuesses" class="row">
-            <h4>Number of Guess Remaining</h4>
-        </div>
-        <div id="incorrectGuesses" class="row">
-            <h4>Letters Already Guessed</h4>
-        </div>
-        <div id="word" class="row">
-            <h2>Word</h2>
+            <div class="col-md-6">
+                <div id="image-div">
+                </div>
+                <div>
+                    <h4 id="answer"></h4>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 id="wins">Wins</h4>
+                <h4 id="remainingGuesses">Number of Guess Remaining</h4>
+                <h4 id="incorrectGuesses">Letters Already Guessed</h4>
+                <h4 id="word">Word</h4>
+            </div>
         </div>
     </div>
     

@@ -3,8 +3,9 @@ var win = false;
 var displayWord = [];
 var correctGuesses = [];
 var incorrectGuesses = [];
-var guessTotal = 0;
+var guessTotal = 12;
 var word = "";
+var image = "";
 var alphabet = "abcdefghijklmnopqrstuvwxyz";
 var fruit = {
     1:"banana",
@@ -20,15 +21,35 @@ var fruit = {
     11:"peach",
     12:"tangerine"
 };
+var fruitImg = {
+    1:"assets/images/banana.jpg",
+    2:`assets/images/apple.jpg`,
+    3:`assets/images/orange.jpg`,
+    4:`assets/images/grape.jpg`,
+    5:`assets/images/strawberry.jpg`,
+    6:`assets/images/raspberry.jpg`,
+    7:`assets/images/blackberry.jpg`,
+    8:`assets/images/watermelon.jpg`,
+    9:`assets/images/cantaloupe.jpg`,
+    10:`assets/images/blueberry.jpg`,
+    11:`assets/images/peach.jpg`,
+    12:`assets/images/tangerine.jpg`
+};
 
 //choose the word and prep the displayed word
-var chooseWord = function() {
+var randomNum = function() {
     choice = Math.floor(Math.random()*12)+1;
-    word = fruit[choice];
+    return choice;
+}
+
+var choose = function() {
+    randNum = randomNum();
+    word = fruit[randNum];
     for (i=0; i<word.length; i++) {
         displayWord[i] = "_";
     };
-    return word, displayWord;
+    image = fruitImg[randNum];
+    return word, displayWord, image;
 };
 
 //Where is the letter in the word?
@@ -66,7 +87,7 @@ document.onkeyup = function (event) {
     var userGuess = event.key;
     if (winTotal === -1) {
         winTotal++;
-        word, displayWord = chooseWord();   
+        word, displayWord, image = choose();   
         $("#word").text(displayWord);
         $("#wins").text("Wins: " + winTotal);
     }
@@ -82,13 +103,15 @@ document.onkeyup = function (event) {
                 if (win === true) {
                     winTotal++;
                     $("#wins").text("Wins: " + winTotal);
-                    guessTotal = 0;
+                    guessTotal = 12;
                     incorrectGuesses = [];
                     correctGuesses = [];
                     displayWord = [];
+                    $("#image-div").html("<img src="+ image + ">");
                     $("#incorrectGuesses").text(incorrectGuesses);
-                    $("#remainingGuesses").text("Number of Guesses: " + guessTotal);
-                    word, displayWord = chooseWord();
+                    $("#remainingGuesses").text("Number of Guesses Remaining: " + guessTotal);
+                    $("#answer").text(word);
+                    word, displayWord, image = choose();
                     $("#word").text(displayWord);
                     win = false;
                 };
@@ -97,16 +120,18 @@ document.onkeyup = function (event) {
                 if (incorrectGuesses.indexOf(userGuess) === -1) {
                     incorrectGuesses.push(userGuess);
                     $("#incorrectGuesses").text(incorrectGuesses);
-                    guessTotal++;
-                    $("#remainingGuesses").text("Number of Guesses: " + guessTotal);
-                    if (guessTotal === 12) {
-                        guessTotal = 0;
+                    guessTotal--;
+                    $("#remainingGuesses").text("Number of Guesses Remaining: " + guessTotal);
+                    if (guessTotal === 0) {
+                        guessTotal = 12;
                         incorrectGuesses = [];
                         correctGuesses = [];
                         displayWord = [];
+                        $("#image-div").html("<img src="+image+ "/>");
                         $("#incorrectGuesses").text(incorrectGuesses);
-                        $("#remainingGuesses").text("Number of Guesses: " + guessTotal);
-                        word, displayWord = chooseWord();
+                        $("#remainingGuesses").text("Number of Guesses Remaining: " + guessTotal);
+                        $("#answer").text(word);
+                        word, displayWord,image = choose();
                         $("#word").text(displayWord);
                         win = false;
                     };
@@ -115,7 +140,5 @@ document.onkeyup = function (event) {
     }; 
     
 }; 
-
-
 
 
